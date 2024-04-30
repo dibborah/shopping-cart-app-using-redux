@@ -1,17 +1,7 @@
-import styles from "./modal.module.css";
-import { createPortal } from "react-dom";
+import React from "react";
 
-const Modal = ({ children, handleCloseModal }) => {
-  return createPortal(
-    <div>
-      <div
-        onClick={() => handleCloseModal(false)}
-        className={styles.modalBackdrop}
-      ></div>
-      <div className={styles.modalContent}>{children}</div>
-    </div>,
-    document.getElementById("modal")
-  );
+const Modal = () => {
+  return <div>Modal</div>;
 };
 
 export default Modal;

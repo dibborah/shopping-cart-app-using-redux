@@ -1,33 +1,18 @@
-import { useCart } from "../contexts/CartProvider";
+import React from "react";
 
-const Product = ({ id, title, price, img }) => {
-  const { cart, addItemToCart } = useCart();
-  const handleAdd = () => {
-    for (let item of cart) {
-      if (item.id === id) {
-        alert("Item already added !!!");
-        return;
-      }
-    }
-    const newCartItem = {
-      id: id,
-      title: title,
-      price: price,
-      img: img,
-      quantity: 1,
-    };
-    addItemToCart(newCartItem);
-    alert("Item added successfully !!!");
-  };
+const Product = ({ id, img, title, price }) => {
   return (
     <div
-      style={{ margin: "1rem", padding: "1rem", border: "2px solid #343434" }}
+      style={{
+        padding: "1rem",
+        margin: "1rem",
+        border: "2px solid black",
+      }}
     >
       <p>id: {id}</p>
-      <img src={img} alt="image not found" height={200} />
-      <p>title : {title}</p>
+      <img src={img} alt={title} height={200}/>
+      <p>title: {title}</p>
       <p>price: {price}</p>
-      <button onClick={handleAdd}>Add to Cart</button>
     </div>
   );
 };

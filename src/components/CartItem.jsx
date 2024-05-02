@@ -1,7 +1,8 @@
 import { useCart } from "../contexts/CartProvider";
 
 const CartItem = ({ id, title, price, quantity }) => {
-  const { increaseProductToCart, decreaseProductToCart, removeProductToCart } = useCart();
+  const { increaseProductToCart, decreaseProductToCart, removeProductToCart } =
+    useCart();
   return (
     <div
       style={{
@@ -12,13 +13,15 @@ const CartItem = ({ id, title, price, quantity }) => {
     >
       <p>id: {id}</p>
       <p>title: {title}</p>
-      <p>price: {price}</p>
+      <p>price: {price * quantity}</p>
       <p>quantity: {quantity}</p>
       <div>
         <button onClick={() => increaseProductToCart(id)}>
           Increase Quantity
         </button>
-        <button onClick={() => decreaseProductToCart(id)}>Decrease Quantity</button>
+        <button onClick={() => decreaseProductToCart(id)}>
+          Decrease Quantity
+        </button>
         <button onClick={() => removeProductToCart(id)}>Remove Quantity</button>
       </div>
     </div>

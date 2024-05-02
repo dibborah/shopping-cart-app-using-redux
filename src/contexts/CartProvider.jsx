@@ -7,10 +7,24 @@ const reducer = (cart, action) => {
     case "ADD_ITEM":
       return [...cart, action.payload];
     case "REMOVE_ITEM":
-
+      return cart.filter((item) => item.id !== action.payload.id);
     case "INCREASE_ITEM":
+      return cart.map((item) => {
+        if (item.id === action.payload.id) {
+          return { ...item, quantity: item.quantity + 1 };
+        }
+        return item;
+      });
 
     case "DECREASE_ITEM":
+      return cart.map((item) => {
+        if (item.id === action.payload.id) {
+          return { ...item, quantity: item.quantity - 1 };
+        }
+        return item;
+      });
+    default:
+      return cart;
   }
 };
 
@@ -18,8 +32,8 @@ const initialState = [];
 
 const CartProvider = ({ children }) => {
   const [cart, dispatch] = useReducer(reducer, initialState);
-  const addProductToCart = (id) => {
-    dispatch({ type: "ADD_ITEM", payload: { id: id } }); // Whatever inside dispatch is called ACTION
+  const addProductToCart = (newItem) => {
+    dispatch({ type: "ADD_ITEM", payload: newItem }); // Whatever inside dispatch is called ACTION
   };
   const removeProductToCart = (id) => {
     dispatch({ type: "REMOVE_ITEM", payload: { id: id } });
@@ -34,6 +48,7 @@ const CartProvider = ({ children }) => {
   return (
     <cartContext.Provider
       value={{
+        cart,
         addProductToCart,
         removeProductToCart,
         increaseProductToCart,

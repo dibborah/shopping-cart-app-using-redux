@@ -1,7 +1,6 @@
 import React from "react";
 import { products } from "../data/products";
-import Product from "./Product";
-
+import Product from "./Product"
 const Products = () => {
   return <div>{
     products && products.map((product)=> {

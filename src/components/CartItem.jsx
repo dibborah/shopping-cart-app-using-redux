@@ -1,8 +1,17 @@
-import { useCart } from "../contexts/CartProvider";
+import { useDispatch } from "react-redux";
+import {
+  increaseProductToCart,
+  decreaseProductToCart,
+  removeProductToCart,
+} from "../features/cart/CartSlice";
 
-const CartItem = ({ id, title, price, quantity }) => {
-  const { increaseProductToCart, decreaseProductToCart, removeProductToCart } =
-    useCart();
+// learn the count thing 
+// Put designs via seeing the styles from codProg.com
+// Use the redux implicit return feature
+
+const CartItem = ({ payload }) => {
+  const { id, title, price, quantity } = payload;
+  const dispatch = useDispatch();
   return (
     <div
       style={{
@@ -16,13 +25,15 @@ const CartItem = ({ id, title, price, quantity }) => {
       <p>price: {price * quantity}</p>
       <p>quantity: {quantity}</p>
       <div>
-        <button onClick={() => increaseProductToCart(id)}>
+        <button onClick={() => dispatch(increaseProductToCart({ id: id }))}>
           Increase Quantity
         </button>
-        <button onClick={() => decreaseProductToCart(id)}>
+        <button onClick={() => quantity > 1 && dispatch(decreaseProductToCart({id: id}))}>
           Decrease Quantity
         </button>
-        <button onClick={() => removeProductToCart(id)}>Remove Quantity</button>
+        <button onClick={() => dispatch(removeProductToCart({ id: id })) }>
+          Remove Quantity
+        </button>
       </div>
     </div>
   );

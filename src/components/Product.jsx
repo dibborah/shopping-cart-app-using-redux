@@ -1,10 +1,14 @@
-import { useCart } from "../contexts/CartProvider";
+import { useDispatch, useSelector } from "react-redux";
+import { addProductToCart } from "../features/cart/CartSlice";
 
 const Product = ({ id, img, title, price }) => {
-  const { cart, addProductToCart } = useCart();
+  const dispatch = useDispatch();
+  const cart = useSelector((state) => {
+    return state.cart;
+  });
   const handleAddCart = () => {
     for (let item of cart) {
-      if (item.id === id) {
+      if (item.payload.id === id) {
         return alert("Item already added!!!");
       }
     }
@@ -14,9 +18,11 @@ const Product = ({ id, img, title, price }) => {
       price: price,
       quantity: 1,
     };
-    addProductToCart(newItem);
+
+    dispatch(addProductToCart(newItem));
     alert("Item added successfully");
   };
+
   return (
     <div
       style={{

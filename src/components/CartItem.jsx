@@ -5,7 +5,7 @@ import {
   removeProductToCart,
 } from "../features/cart/CartSlice";
 
-// learn the count thing 
+// learn the count thing
 // Put designs via seeing the styles from codProg.com
 // Use the redux implicit return feature
 
@@ -25,13 +25,20 @@ const CartItem = ({ payload }) => {
       <p>price: {price * quantity}</p>
       <p>quantity: {quantity}</p>
       <div>
-        <button onClick={() => dispatch(increaseProductToCart({ id: id }))}>
+        <button onClick={() => dispatch(increaseProductToCart({ id }))}>
+        {
+          // {id: id} => {id} // Internally they work the same
+        }
           Increase Quantity
         </button>
-        <button onClick={() => quantity > 1 && dispatch(decreaseProductToCart({id: id}))}>
+        <button
+          onClick={() =>
+            quantity > 1 && dispatch(decreaseProductToCart({ id }))
+          }
+        >
           Decrease Quantity
         </button>
-        <button onClick={() => dispatch(removeProductToCart({ id: id })) }>
+        <button onClick={() => dispatch(removeProductToCart({ id }))}>
           Remove Quantity
         </button>
       </div>

@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 import CartItem from "./CartItem";
 
 // Need not return in redux ;
-// customize the cartSlice file accordingly
+// redux explicitly return since it internally uses immer js
 
 const Cart = () => {
   const cart = useSelector((state) => {

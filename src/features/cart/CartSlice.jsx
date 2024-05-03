@@ -1,21 +1,24 @@
 import { createSlice } from "@reduxjs/toolkit";
 
+// Need not return in redux ;
+// redux explicitly return since it internally uses immer js
+
 const initialValue = [];
 
 const cartSlice = createSlice({
-  name: "carty",
+  name: "cart",
   initialState: initialValue,
   reducers: {
     addProductToCart: (cart, payload) => {
       // return [...cart, payload];
       cart.push(payload);
     },
-    removeProductToCart: (cart, actions) => {
-      return cart.filter((item) => item.payload.id !== actions.payload.id);
+    removeProductToCart: (cart, action) => {
+      return cart.filter((item) => item.payload.id !== action.payload.id);
     },
-    increaseProductToCart: (cart, actions) => {
+    increaseProductToCart: (cart, action) => {
       // return cart.map((item) => {
-      //   if (item.payload.id === actions.payload.id) {
+      //   if (item.payload.id === action.payload.id) {
       //     return {
       //       ...item,
       //       payload: { ...item.payload, quantity: item.payload.quantity + 1 },
@@ -24,16 +27,15 @@ const cartSlice = createSlice({
       //   return item;
       // });
 
-      cart.forEach((item)=>{
-        if(item.payload.id === actions.payload.id){
+      cart.forEach((item) => {
+        if (item.payload.id === action.payload.id) {
           item.payload.quantity = item.payload.quantity + 1;
         }
-      })
+      });
     },
-    decreaseProductToCart: (cart, actions) => {
-
+    decreaseProductToCart: (cart, action) => {
       // return cart.map((item) => {
-      //   if (item.payload.id === actions.payload.id) {
+      //   if (item.payload.id === action.payload.id) {
       //     return {
       //       ...item,
       //       payload: { ...item.payload, quantity: item.payload.quantity - 1 },
@@ -42,11 +44,11 @@ const cartSlice = createSlice({
       //   return item;
       // });
 
-      cart.forEach((item)=>{
-        if(item.payload.id === actions.payload.id){
+      cart.forEach((item) => {
+        if (item.payload.id === action.payload.id) {
           item.payload.quantity = item.payload.quantity - 1;
         }
-      })
+      });
     },
   },
 });
